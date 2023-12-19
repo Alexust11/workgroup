@@ -1,6 +1,8 @@
 package main.workgroup.controller;
 
 import lombok.Data;
+
+import main.workgroup.dto.WorkerInfo;
 import main.workgroup.model.Worker;
 import main.workgroup.service.WorkerService;
 import org.apache.commons.lang3.StringUtils;
@@ -8,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Data
@@ -31,6 +34,15 @@ public class WorkerController {
      catch (Exception e) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred");
     }
+
+    }
+    @GetMapping("/info")
+    public List<Worker> getAllWorkers() {
+        return workerService.getAllWorkers();
+    }
+    @GetMapping("/shortInfo")
+    public List<WorkerInfo> getShortList() {
+        return workerService.getShortInfoWorker();
     }
 
 }
