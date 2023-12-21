@@ -31,7 +31,7 @@ public class WorkerService {
         return workerRepository.findAll();
     }
 
-    public Optional<Worker> getWorkerById(Long id) {
+    public Optional<Worker> findWorkerById(Long id) {
         return workerRepository.findById(id);
     }
 
@@ -46,4 +46,7 @@ public class WorkerService {
 
         return workerInfos;
     }
+     public void deleteWorkerById(Long id){workerRepository.deleteById(id);}
+
+
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Data
 @RestController
@@ -44,5 +45,14 @@ public class WorkerController {
     public List<WorkerInfo> getShortList() {
         return workerService.getShortInfoWorker();
     }
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteWorkerById(@PathVariable Long id){
+        Optional<Worker> worker = workerService.findWorkerById(id);
+        if(worker.isPresent()){
+            workerService.deleteWorkerById(id);
+            return ResponseEntity.ok("Запись успешно удалена");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Запись не найдена");
+        }
+    }
 }
